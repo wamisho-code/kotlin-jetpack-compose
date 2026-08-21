@@ -33,6 +33,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -66,14 +67,59 @@ import com.example.myjetcompose.ui.theme.MyJetComposeTheme
 import com.example.myjetcompose.ui.theme.font
 import coil3.size.Size
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
+
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 
 class MainActivity : ComponentActivity() {
+    companion object{
+        val items=mutableListOf<Item>(
+            Item("item1",R.drawable.camel),
+            Item("item2",R.drawable.goat),
+            Item("item3",R.drawable.camel),
+            Item("item4",R.drawable.goat),
+            Item("item5",R.drawable.camel),
+            Item("item6",R.drawable.owl),
+            Item("item7",R.drawable.camel),
+            Item("item8",R.drawable.goat),
+            Item("item9",R.drawable.camel),
+            Item("item10",R.drawable.owl),
+        )
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             MyJetComposeTheme {
-                WelcomeText()
+                Surface(modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background) {
+                    val navHostController =rememberNavController()
+                    NavHost(navHostController,startDestination="home_screen"){
+                        composable("home_screen"){
+                            HomeScreen(navHostController)
+                        }
+                        composable("lazy_row_screen"){
+                            LazyRowScreen(navHostController)
+                        }
+                        composable("lazy_column_screen"){
+                            LazyColumnScreen()
+                        }
+                        composable("lazy_grid_screen"){
+                            LazyGridScreen()
+                        }
+                        composable("screen1/{name}/{age}") {
+                            val passedName=it.arguments?.getString("name")
+                            val passedAge= it.arguments?.getString("age")?.toIntOrNull()
+                            Screen1(passedName,passedAge)
+                        }
+
+                    }
+                }
             }
         }
     }
@@ -88,46 +134,37 @@ fun WelcomeText(){
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-
-            Image(
-                modifier = Modifier
-
-                    .clip(RoundedCornerShape(20.dp)),
-                painter = painterResource(R.drawable.camel),
-                contentDescription = "Image of camel"
-            )
-            Spacer(modifier = Modifier.height(60.dp))
-            val imageurl="https://static0.thesportsterimages.com/wordpress/wp-content/uploads/wm/2024/08/why-roman-reigns-works-a-part-time-wwe-schedule-explained.jpg?w=1200&h=675&fit=crop"
-            val model=ImageRequest
-                .Builder(LocalContext.current)
-                .data(imageurl)
-                .size(Size.ORIGINAL)
-                .build()
-
-            Spacer(modifier = Modifier.height(60.dp))
-        val painter = rememberAsyncImagePainter(model = model)
-        val imageState = painter.state.collectAsState().value   // ← .value unwraps the State<T> wrapper
-
-        if (imageState is AsyncImagePainter.State.Success) {
-            Image(
-                modifier = Modifier.clip(RoundedCornerShape(20.dp)),
-                painter = painter,
-                contentDescription = null
-            )
+    }
+}
+@Composable
+fun HomeScreen(navHostController: NavHostController){
+    Column(
+        modifier = Modifier
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Button(
+            onClick = {
+            navHostController.navigate("lazy_row_screen")
+        }) {
+            Text("Lazy Row")
         }
-        if (imageState is AsyncImagePainter.State.Loading) {
-            CircularProgressIndicator(
-                modifier = Modifier.size(40.dp),
-                color = MaterialTheme.colorScheme.primary
-            )
+        Spacer(modifier = Modifier.height(30.dp))
+        Button(
+            onClick = {
+                navHostController.navigate("lazy_column_screen")
+            }) {
+            Text("Lazy Column")
         }
-        if (imageState is AsyncImagePainter.State.Error) {
-            Icon(imageVector = Icons.Rounded.Warning, contentDescription = null)
+        Spacer(modifier = Modifier.height(30.dp))
+        Button(
+            onClick = {
+                navHostController.navigate("lazy_grid_screen")
+            }) {
+            Text("Lazy Grid")
         }
-
-
-
-
+        Spacer(modifier = Modifier.height(30.dp))
 
     }
 }
