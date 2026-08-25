@@ -49,7 +49,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewDynamicColors
+import androidx.compose.ui.tooling.preview.PreviewFontScale
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -90,9 +94,15 @@ val bottomNavItems=listOf<BottomNavigation>(
     ),
 
 )
-
+@Preview(
+    showSystemUi = true
+)
 @Composable
-fun Screen1(name: String?,age: Int?){
+fun ScreenUI(){
+    Screen1()
+}
+@Composable
+fun Screen1(){
     var selectedItem by remember {
         mutableStateOf(0)
     }

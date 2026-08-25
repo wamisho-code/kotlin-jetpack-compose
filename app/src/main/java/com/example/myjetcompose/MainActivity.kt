@@ -73,98 +73,20 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.myjetcompose.view.HomePage
 
 class MainActivity : ComponentActivity() {
-    companion object{
-        val items=mutableListOf<Item>(
-            Item("item1",R.drawable.camel),
-            Item("item2",R.drawable.goat),
-            Item("item3",R.drawable.camel),
-            Item("item4",R.drawable.goat),
-            Item("item5",R.drawable.camel),
-            Item("item6",R.drawable.owl),
-            Item("item7",R.drawable.camel),
-            Item("item8",R.drawable.goat),
-            Item("item9",R.drawable.camel),
-            Item("item10",R.drawable.owl),
-        )
-    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
         setContent {
             MyJetComposeTheme {
-                Surface(modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background) {
-                    val navHostController =rememberNavController()
-                    NavHost(navHostController,startDestination="home_screen"){
-                        composable("home_screen"){
-                            HomeScreen(navHostController)
-                        }
-                        composable("lazy_row_screen"){
-                            LazyRowScreen(navHostController)
-                        }
-                        composable("lazy_column_screen"){
-                            LazyColumnScreen()
-                        }
-                        composable("lazy_grid_screen"){
-                            LazyGridScreen()
-                        }
-                        composable("screen1/{name}/{age}") {
-                            val passedName=it.arguments?.getString("name")
-                            val passedAge= it.arguments?.getString("age")?.toIntOrNull()
-                            Screen1(passedName,passedAge)
-                        }
-
-                    }
-                }
+                HomePage()
             }
+
         }
     }
 
-}
-@Composable
-fun WelcomeText(){
-    Column(
-        modifier = Modifier.fillMaxSize()
-            .verticalScroll(rememberScrollState()),
-
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-    }
-}
-@Composable
-fun HomeScreen(navHostController: NavHostController){
-    Column(
-        modifier = Modifier
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Button(
-            onClick = {
-            navHostController.navigate("lazy_row_screen")
-        }) {
-            Text("Lazy Row")
-        }
-        Spacer(modifier = Modifier.height(30.dp))
-        Button(
-            onClick = {
-                navHostController.navigate("lazy_column_screen")
-            }) {
-            Text("Lazy Column")
-        }
-        Spacer(modifier = Modifier.height(30.dp))
-        Button(
-            onClick = {
-                navHostController.navigate("lazy_grid_screen")
-            }) {
-            Text("Lazy Grid")
-        }
-        Spacer(modifier = Modifier.height(30.dp))
-
-    }
 }
