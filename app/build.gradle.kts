@@ -40,6 +40,14 @@ android {
 }
 
 dependencies {
+    //exo player dep
+    implementation("androidx.media3:media3-exoplayer:1.4.0")
+    implementation("androidx.media3:media3-exoplayer-hls:1.4.0")
+    // If using live streams
+    implementation("androidx.media3:media3-ui:1.4.0")
+    // For PlayerView UI
+    //
+    implementation("androidx.navigation:navigation-compose:2.9.8")
     implementation("androidx.navigation:navigation-compose:2.8.0")
     implementation("io.coil-kt.coil3:coil-compose:3.0.4")
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.0.4")

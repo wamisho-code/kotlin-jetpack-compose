@@ -68,12 +68,16 @@ import com.example.myjetcompose.ui.theme.font
 import coil3.size.Size
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
+import androidx.navigation.NavHost
 
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.myjetcompose.view.FirstScreen
 import com.example.myjetcompose.view.HomePage
+import com.example.myjetcompose.view.Player
+import com.example.myjetcompose.view.SecondScreen
 
 class MainActivity : ComponentActivity() {
 
@@ -83,7 +87,13 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MyJetComposeTheme {
-                HomePage()
+                Surface(modifier = Modifier.fillMaxSize()
+                   // .padding(30.dp)
+                    , color = MaterialTheme.colorScheme.background) {
+
+                    Player()
+
+                }
             }
 
         }
