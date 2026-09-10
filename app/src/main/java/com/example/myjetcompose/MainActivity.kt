@@ -37,6 +37,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -68,6 +69,8 @@ import com.example.myjetcompose.ui.theme.font
 import coil3.size.Size
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavHost
 
 import androidx.navigation.NavHostController
@@ -78,20 +81,22 @@ import com.example.myjetcompose.view.FirstScreen
 import com.example.myjetcompose.view.HomePage
 import com.example.myjetcompose.view.Player
 import com.example.myjetcompose.view.SecondScreen
+import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
-
         setContent {
+
             MyJetComposeTheme {
                 Surface(modifier = Modifier.fillMaxSize()
                    // .padding(30.dp)
                     , color = MaterialTheme.colorScheme.background) {
 
-                    Player()
+                    Text("hello")
 
                 }
             }

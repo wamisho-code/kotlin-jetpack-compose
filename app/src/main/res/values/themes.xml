@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <style name="Theme.MySplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/splash_back</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/bag_music_bold</item>
+        <item name="postSplashScreenTheme">@style/Theme.MyJetCompose</item>
+    </style>
     <style name="Theme.MyJetCompose" parent="android:Theme.Material.Light.NoActionBar" />
 </resources>

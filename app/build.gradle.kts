@@ -40,6 +40,8 @@ android {
 }
 
 dependencies {
+    implementation("androidx.core:core-splashscreen:1.0.0")
+
     //exo player dep
     implementation("androidx.media3:media3-exoplayer:1.4.0")
     implementation("androidx.media3:media3-exoplayer-hls:1.4.0")
